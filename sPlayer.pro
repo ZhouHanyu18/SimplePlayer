@@ -14,10 +14,30 @@ INCLUDEPATH += . \
     $(QTDIR)/mkspecs/win32-msvc2013 \
     ./Temp/GeneratedFiles
 LIBS += -lshell32 \
-    -lC:/qt/qt5.5.1/5.5/msvc2013_64/lib/Qt5Cored
+    -lC:/qt/qt5.5.1/5.5/msvc2013_64/lib/Qt5Cored \
+    -lavcodec \
+    -lavformat \
+    -lavutil \
+    -lavdevice \
+    -lavfilter \
+    -lpostproc \
+    -lswresample \
+    -lswscale \
+    -lSDL2 \
+    -lSDL2main \
+    -lSDL2test
 DEPENDPATH += .
 MOC_DIR += ./Temp/GeneratedFiles/debug
 OBJECTS_DIR += debug
 UI_DIR += ./Temp/GeneratedFiles
 RCC_DIR += ./Temp/GeneratedFiles
 include(sPlayer.pri)
+
+FORMS += \
+    src/VideoPlayer/videodialog.ui
+
+HEADERS += \
+    src/VideoPlayer/videodialog.h
+
+SOURCES += \
+    src/VideoPlayer/videodialog.cpp

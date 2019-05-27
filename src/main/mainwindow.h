@@ -2,8 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QKeyEvent>
 #include "VideoPlayer/VideoPlayer.h"
-
+#include "VideoPlayer/videoform.h"
 namespace Ui {
 class MainWindow;
 }
@@ -24,11 +25,17 @@ private slots:
     void on_about_triggered();
 
     void on_quit_triggered();
-
+protected:
+	void enterEvent(QEvent *);                      //进入QWidget瞬间事件
+	void leaveEvent(QEvent *);                      //离开QWidget瞬间事件
+	void keyPressEvent(QKeyEvent *ev);
+	void keyReleaseEvent(QKeyEvent *ev);
 private:
     Ui::MainWindow *ui;
 private:
 	VideoPlayer *pVideoPlayer;
+	VideoForm *pVideoForm;
+
 };
 
 #endif // MAINWINDOW_H
