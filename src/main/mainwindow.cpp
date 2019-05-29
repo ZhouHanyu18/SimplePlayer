@@ -9,10 +9,18 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 	pVideoForm = new VideoForm(this);
+	bChild = TRUE;
 	pVideoForm->hide();
 	pVideoPlayer = NULL;
-	setStyleSheet("background-color:black;");
+	
+	ui->menuBar->setStyleSheet("QMenuBar{background-color:rgb(60,60,60);}"
+		"QMenuBar:item{color:rgb(255,255,255);background-color:rgb(60,60,60);}");
+	ui->menu->setStyleSheet("QMenu{color:rgb(100,100,100);selection-color: rgb(255, 255, 255);}");
 	setFocusPolicy(Qt::StrongFocus);
+	//setWindowFlags(Qt::FramelessWindowHint);
+	pThread = new MyThread();
+	pThread->start();
+	connect(pThread, &MyThread::send, this, &MainWindow::myThread);
 }
 
 MainWindow::~MainWindow()
@@ -20,22 +28,78 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::myThread()
+{
+	if (isFullScreen())
+	{
+		SetWindowPos((HWND)this->winId(), HWND_TOPMOST, pos().x(), pos().y(), width(), height(), SWP_SHOWWINDOW);
+	}
+	int H = geometry().height() + geometry().y();
+	int h = QCursor::pos().y();
+	if (h<H && h>H - 100)
+	{
+		init();
+	}
+	else
+	{
+		pVideoForm->hide();
+	}
+}
+
+void MainWindow::init()
+{
+	if (bChild)
+		pVideoForm->move(0, height() - 100);
+	else
+		pVideoForm->move(geometry().x(), geometry().y() + geometry().height() - 100);
+	pVideoForm->resize(width(), 100);
+	pVideoForm->show();
+}
+
+void MainWindow::mousePressEvent(QMouseEvent * event)
+{
+	if (event->button() == Qt::LeftButton) //点击左边鼠标
+	{
+		dragPosition = event->globalPos() - frameGeometry().topLeft();
+		event->accept();   //鼠标事件被系统接收
+	}
+	
+}
+
+void MainWindow::mouseMoveEvent(QMouseEvent * event)
+{
+	if (!isFullScreen() && event->buttons() == Qt::LeftButton) //当满足鼠标左键被点击时。
+	{
+		move(QCursor::pos() - dragPosition);//移动窗口
+		init();
+		event->accept();
+	}
+}
+
+void MainWindow::mouseDoubleClickEvent(QMouseEvent *event)
+{
+	if (isFullScreen())
+	{
+		showNormal();
+		SetWindowPos((HWND)this->winId(), HWND_NOTOPMOST, pos().x(), pos().y(), width(), height(), SWP_SHOWWINDOW);
+		init();
+	}
+	else
+	{
+		showFullScreen();
+		//pVideoForm->setWindowFlags(Qt::FramelessWindowHint | Qt::Tool | Qt::WindowStaysOnTopHint);
+		bChild = FALSE;
+		init();
+	}
+		
+}
+
 void MainWindow::enterEvent(QEvent *)
 {
-	if (geometry().contains(QCursor::pos()))
-	{
-		pVideoForm->move(0, height()-100);
-		pVideoForm->resize(width(), 100);
-		pVideoForm->show();
-	}
 }
 
 void MainWindow::leaveEvent(QEvent *)
 {
-	if (!geometry().contains(QCursor::pos()))
-	{
-		pVideoForm->hide();
-	}
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *ev)
@@ -51,11 +115,18 @@ void MainWindow::keyPressEvent(QKeyEvent *ev)
 			pVideoPlayer->seek(10);
 		break;
 	case Qt::Key_Up:
+		pVideoPlayer->speed(2);
 		printf("12312");
 		break;
 	case Qt::Key_Down:
 		break;
 	case Qt::Key_Space:
+		pVideoPlayer->stop();
+		break;
+	case Qt::Key_Escape:
+		/*SetWindowPos((HWND)this->winId(), HWND_NOTOPMOST, pos().x(), pos().y(), width(), height(), SWP_SHOWWINDOW);
+		showNormal();*/
+		//init();
 		break;
 	default:
 		break;
@@ -73,7 +144,6 @@ void MainWindow::keyReleaseEvent(QKeyEvent *ev)
 
 	QWidget::keyReleaseEvent(ev);
 }
-
 
 void MainWindow::on_open_triggered()
 {
@@ -100,5 +170,5 @@ void MainWindow::on_about_triggered()
 
 void MainWindow::on_quit_triggered()
 {
-
+	close();
 }

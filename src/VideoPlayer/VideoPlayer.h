@@ -16,7 +16,7 @@ private:
 	bool finishRead;//播放完成
 	bool bStop;//暂停播放
 	bool bStart;//开始解码
-
+	double dSpeed;//倍速
 	SDL_Event event;
 	int indexVideo;
 	int indexAudio;
@@ -39,8 +39,10 @@ private:
 	AVFrame *pAudioFrame;
 
 public:
-	int play(char *filepath, const void *handle);
+	int play(char *filepath, const void *handle = 0);
+	void stop();
 	void seek(double T);
+	void speed(double S);
 private:
 	int decodeAudio();
 	int decodeVideo();

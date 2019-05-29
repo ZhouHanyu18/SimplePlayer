@@ -3,8 +3,9 @@
 VideoPlayer::VideoPlayer()
 {
 	bStart = FALSE;
-	bStop = TRUE;
+	bStop = FALSE;
 	finishRead = FALSE;
+	dSpeed = 1;
 	qAudio = new PacketQueue();
 	qVideo = new PacketQueue();
 
@@ -37,8 +38,12 @@ VideoPlayer::~VideoPlayer()
 
 int VideoPlayer::read()
 {
-	if (bStart && bStop)
+	if (bStart && !bStop)
 	{
+		if (dSpeed>0.001)
+		{
+			//av_seek_frame(pFormatCtx, indexAudio, (dSpeed + ptsAudio / 1000) / av_q2d(pAudioCodeCtx->time_base), AVSEEK_FLAG_FRAME);
+		}
 		//一帧一帧读取压缩的音频数据AVPacket
 		if (av_read_frame(pFormatCtx, packet) >= 0)
 		{
@@ -65,7 +70,7 @@ static Uint32 audio_len;
 static Uint8 *audio_pos;
 void VideoPlayer::audioCallback(Uint8 *stream, int len)
 {
-	if (bStart && bStop)
+	if (bStart && !bStop)
 	{
 		SDL_memset(stream, 0, len);
 		if (audio_len == 0)		//有数据才播放
@@ -80,7 +85,7 @@ void VideoPlayer::audioCallback(Uint8 *stream, int len)
 
 int VideoPlayer::decode()
 {
-	if (bStart && bStop)
+	if (bStart && !bStop)
 	{
 		SDL_Event event;
 		event.type = SFM_REFRESH_EVENT;
@@ -112,10 +117,10 @@ int VideoPlayer::play(char *filepath, const void *handle)
 	{
 		return -1;
 	}
-	if (setWindow(pVideoCodeCtx, handle) == -1)
-	{
-		return -1;
-	}
+	if (handle)
+		setWindow(pVideoCodeCtx, handle);
+	else
+		setWindow(pVideoCodeCtx);
 	videoBuffer = (unsigned char *)av_malloc(av_image_get_buffer_size(AV_PIX_FMT_YUV420P, pVideoCodeCtx->width, pVideoCodeCtx->height, 1));
 	audioSetting(pAudioCodeCtx);
 	bStart = TRUE;
@@ -139,6 +144,7 @@ int VideoPlayer::play(char *filepath, const void *handle)
 			SDL_RenderPresent(sdlRenderer);
 			//SDL End-----------------------
 		}
+		
 	}
 }
 
@@ -182,6 +188,10 @@ int VideoPlayer::decodeAudio()
 
 int VideoPlayer::decodeVideo()
 {
+	if (bStop)
+	{
+		return -1;
+	}
 	if (finishRead && qVideo->size == 0)
 	{
 		printf("outqVideo\n");
@@ -214,14 +224,30 @@ int VideoPlayer::decodeVideo()
 	return -1;//表示未完成
 }
 
+void VideoPlayer::stop()
+{
+	bStop = !bStop;
+	if (bStop)
+	{
+		SDL_PauseAudio(1);
+	}
+	else
+	{
+		SDL_PauseAudio(0);
+	}
+}
+
 void VideoPlayer::seek(double T)
 {
-	bStop = FALSE;
-	qAudio->initQueue();
-	qVideo->initQueue();
-	qAudio->initQueue();
-	qVideo->initQueue();
-	av_seek_frame(pFormatCtx, indexAudio, (T + ptsAudio/1000) / av_q2d(pAudioCodeCtx->time_base), AVSEEK_FLAG_BACKWARD);
-	
 	bStop = TRUE;
+	qAudio->initQueue();
+	qVideo->initQueue();
+	av_seek_frame(pFormatCtx, indexAudio, (T + ptsAudio / 1000) / av_q2d(pAudioCodeCtx->time_base), AVSEEK_FLAG_BACKWARD);
+	
+	bStop = FALSE;
+}
+
+void VideoPlayer::speed(double S)
+{
+	dSpeed = S;
 }

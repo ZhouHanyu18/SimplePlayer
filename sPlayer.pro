@@ -32,12 +32,3 @@ OBJECTS_DIR += debug
 UI_DIR += ./Temp/GeneratedFiles
 RCC_DIR += ./Temp/GeneratedFiles
 include(sPlayer.pri)
-
-FORMS += \
-    src/VideoPlayer/videodialog.ui
-
-HEADERS += \
-    src/VideoPlayer/videodialog.h
-
-SOURCES += \
-    src/VideoPlayer/videodialog.cpp

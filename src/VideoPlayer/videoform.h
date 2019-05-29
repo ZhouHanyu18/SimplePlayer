@@ -19,9 +19,6 @@ private:
     Ui::VideoForm *ui;
 public:
 	
-protected:
-	void enterEvent(QEvent *);                      //进入QWidget瞬间事件
-	void leaveEvent(QEvent *);                      //离开QWidget瞬间事件
 private slots:
 	void on_left_clicked();
 	void on_start_clicked();

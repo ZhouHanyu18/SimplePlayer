@@ -12,6 +12,7 @@ VideoForm::VideoForm(QWidget *parent) :
 	//setStyleSheet("background-color:black;");
 	//setAttribute(Qt::WA_TranslucentBackground, true);
 	//setAttribute(Qt::WA_ShowWithoutActivating, true);
+	
 	setWindowOpacity(0.5);
 }
 
@@ -20,30 +21,20 @@ VideoForm::~VideoForm()
     delete ui;
 }
 
-void VideoForm::enterEvent(QEvent *)
-{
-	
-}
-
-void VideoForm::leaveEvent(QEvent *)
-{
-	
-}
-
-
-
 void VideoForm::on_left_clicked()
 {
 	MainWindow *p = (MainWindow *)parentWidget();
-	
+	printf("left\n");
 }
 
 void VideoForm::on_start_clicked()
 {
 	MainWindow *p = (MainWindow *)parentWidget();
+	printf("start\n");
 }
 
 void VideoForm::on_right_clicked()
 {
 	MainWindow *p = (MainWindow *)parentWidget();
+	printf("right\n");
 }
