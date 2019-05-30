@@ -12,26 +12,26 @@
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="src\main\mainwindow.ui">
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Qt\Qt5.5.1\5.5\msvc2013_64\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Uic%27ing %(Identity)...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\Temp\GeneratedFiles\ui_%(Filename).h;%(Outputs)</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(QTDIR)\bin\uic.exe" -o ".\Temp\GeneratedFiles\ui_%(Filename).h" "%(FullPath)"</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"C:\Qt\Qt5.5.1\5.5\msvc2013_64\bin\uic.exe" -o ".\Temp\GeneratedFiles\ui_%(Filename).h" "%(FullPath)"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Qt\Qt5.5.1\5.5\msvc2013_64\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Uic%27ing %(Identity)...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\Temp\GeneratedFiles\ui_%(Filename).h;%(Outputs)</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\uic.exe" -o ".\Temp\GeneratedFiles\ui_%(Filename).h" "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"C:\Qt\Qt5.5.1\5.5\msvc2013_64\bin\uic.exe" -o ".\Temp\GeneratedFiles\ui_%(Filename).h" "%(FullPath)"</Command>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="src\main\MyThread.h">
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Qt\Qt5.5.1\5.5\msvc2013_64\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing MyThread.h...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\Temp\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\Temp\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB "-I." "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtANGLE" "-I$(QTDIR)\include\QtCore" "-I.\debug" "-I$(QTDIR)\mkspecs\win32-msvc2013" "-I.\Temp\GeneratedFiles"</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"C:\Qt\Qt5.5.1\5.5\msvc2013_64\bin\moc.exe"  "%(FullPath)" -o ".\Temp\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB "-I." "-IC:\Qt\Qt5.5.1\5.5\msvc2013_64\include" "-IC:\Qt\Qt5.5.1\5.5\msvc2013_64\include\QtWidgets" "-IC:\Qt\Qt5.5.1\5.5\msvc2013_64\include\QtGui" "-IC:\Qt\Qt5.5.1\5.5\msvc2013_64\include\QtANGLE" "-IC:\Qt\Qt5.5.1\5.5\msvc2013_64\include\QtCore" "-I.\debug" "-IC:\Qt\Qt5.5.1\5.5\msvc2013_64\mkspecs\win32-msvc2013" "-I.\Temp\GeneratedFiles"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Qt\Qt5.5.1\5.5\msvc2013_64\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing MyThread.h...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\Temp\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\Temp\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG "-I." "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtANGLE" "-I$(QTDIR)\include\QtCore" "-I.\release" "-I$(QTDIR)\mkspecs\win32-msvc2013" "-I.\Temp\GeneratedFiles"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"C:\Qt\Qt5.5.1\5.5\msvc2013_64\bin\moc.exe"  "%(FullPath)" -o ".\Temp\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG "-I." "-IC:\Qt\Qt5.5.1\5.5\msvc2013_64\include" "-IC:\Qt\Qt5.5.1\5.5\msvc2013_64\include\QtWidgets" "-IC:\Qt\Qt5.5.1\5.5\msvc2013_64\include\QtGui" "-IC:\Qt\Qt5.5.1\5.5\msvc2013_64\include\QtANGLE" "-IC:\Qt\Qt5.5.1\5.5\msvc2013_64\include\QtCore" "-I.\release" "-IC:\Qt\Qt5.5.1\5.5\msvc2013_64\mkspecs\win32-msvc2013" "-I.\Temp\GeneratedFiles"</Command>
     </CustomBuild>
     <CustomBuild Include="src\VideoPlayer\player.h">
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -66,14 +66,14 @@
       </AdditionalInputs>
     </CustomBuild>
     <CustomBuild Include="src\VideoPlayer\videoform.h">
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Qt\Qt5.5.1\5.5\msvc2013_64\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing videoform.h...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\Temp\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\Temp\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB  "-I." "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtANGLE" "-I$(QTDIR)\include\QtCore" "-I.\debug" "-I$(QTDIR)\mkspecs\win32-msvc2013" "-I.\Temp\GeneratedFiles"</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"C:\Qt\Qt5.5.1\5.5\msvc2013_64\bin\moc.exe"  "%(FullPath)" -o ".\Temp\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB  "-I." "-IC:\Qt\Qt5.5.1\5.5\msvc2013_64\include" "-IC:\Qt\Qt5.5.1\5.5\msvc2013_64\include\QtWidgets" "-IC:\Qt\Qt5.5.1\5.5\msvc2013_64\include\QtGui" "-IC:\Qt\Qt5.5.1\5.5\msvc2013_64\include\QtANGLE" "-IC:\Qt\Qt5.5.1\5.5\msvc2013_64\include\QtCore" "-I.\debug" "-IC:\Qt\Qt5.5.1\5.5\msvc2013_64\mkspecs\win32-msvc2013" "-I.\Temp\GeneratedFiles"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Qt\Qt5.5.1\5.5\msvc2013_64\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing videoform.h...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\Temp\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\Temp\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG "-I." "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtANGLE" "-I$(QTDIR)\include\QtCore" "-I.\release" "-I$(QTDIR)\mkspecs\win32-msvc2013" "-I.\Temp\GeneratedFiles"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"C:\Qt\Qt5.5.1\5.5\msvc2013_64\bin\moc.exe"  "%(FullPath)" -o ".\Temp\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG "-I." "-IC:\Qt\Qt5.5.1\5.5\msvc2013_64\include" "-IC:\Qt\Qt5.5.1\5.5\msvc2013_64\include\QtWidgets" "-IC:\Qt\Qt5.5.1\5.5\msvc2013_64\include\QtGui" "-IC:\Qt\Qt5.5.1\5.5\msvc2013_64\include\QtANGLE" "-IC:\Qt\Qt5.5.1\5.5\msvc2013_64\include\QtCore" "-I.\release" "-IC:\Qt\Qt5.5.1\5.5\msvc2013_64\mkspecs\win32-msvc2013" "-I.\Temp\GeneratedFiles"</Command>
     </CustomBuild>
     <CustomBuild Include="src\VideoPlayer\VideoPlayer.h">
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -92,14 +92,14 @@
       </AdditionalInputs>
     </CustomBuild>
     <CustomBuild Include="src\main\mainwindow.h">
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Qt\Qt5.5.1\5.5\msvc2013_64\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing mainwindow.h...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\Temp\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\Temp\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB  "-I." "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtANGLE" "-I$(QTDIR)\include\QtCore" "-I.\debug" "-I$(QTDIR)\mkspecs\win32-msvc2013" "-I.\Temp\GeneratedFiles"</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"C:\Qt\Qt5.5.1\5.5\msvc2013_64\bin\moc.exe"  "%(FullPath)" -o ".\Temp\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB  "-I." "-IC:\Qt\Qt5.5.1\5.5\msvc2013_64\include" "-IC:\Qt\Qt5.5.1\5.5\msvc2013_64\include\QtWidgets" "-IC:\Qt\Qt5.5.1\5.5\msvc2013_64\include\QtGui" "-IC:\Qt\Qt5.5.1\5.5\msvc2013_64\include\QtANGLE" "-IC:\Qt\Qt5.5.1\5.5\msvc2013_64\include\QtCore" "-I.\debug" "-IC:\Qt\Qt5.5.1\5.5\msvc2013_64\mkspecs\win32-msvc2013" "-I.\Temp\GeneratedFiles"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Qt\Qt5.5.1\5.5\msvc2013_64\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing mainwindow.h...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\Temp\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\Temp\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG "-I." "-I$(QTDIR)\include" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtANGLE" "-I$(QTDIR)\include\QtCore" "-I.\release" "-I$(QTDIR)\mkspecs\win32-msvc2013" "-I.\Temp\GeneratedFiles"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"C:\Qt\Qt5.5.1\5.5\msvc2013_64\bin\moc.exe"  "%(FullPath)" -o ".\Temp\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DNDEBUG "-I." "-IC:\Qt\Qt5.5.1\5.5\msvc2013_64\include" "-IC:\Qt\Qt5.5.1\5.5\msvc2013_64\include\QtWidgets" "-IC:\Qt\Qt5.5.1\5.5\msvc2013_64\include\QtGui" "-IC:\Qt\Qt5.5.1\5.5\msvc2013_64\include\QtANGLE" "-IC:\Qt\Qt5.5.1\5.5\msvc2013_64\include\QtCore" "-I.\release" "-IC:\Qt\Qt5.5.1\5.5\msvc2013_64\mkspecs\win32-msvc2013" "-I.\Temp\GeneratedFiles"</Command>
     </CustomBuild>
     <CustomBuild Include="Temp\GeneratedFiles\ui_mainwindow.h">
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -146,14 +146,14 @@
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="src\VideoPlayer\videoform.ui">
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Qt\Qt5.5.1\5.5\msvc2013_64\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Uic%27ing %(Identity)...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\Temp\GeneratedFiles\ui_%(Filename).h;%(Outputs)</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(QTDIR)\bin\uic.exe" -o ".\Temp\GeneratedFiles\ui_%(Filename).h" "%(FullPath)"</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"C:\Qt\Qt5.5.1\5.5\msvc2013_64\bin\uic.exe" -o ".\Temp\GeneratedFiles\ui_%(Filename).h" "%(FullPath)"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Qt\Qt5.5.1\5.5\msvc2013_64\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Uic%27ing %(Identity)...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\Temp\GeneratedFiles\ui_%(Filename).h;%(Outputs)</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\uic.exe" -o ".\Temp\GeneratedFiles\ui_%(Filename).h" "%(FullPath)"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"C:\Qt\Qt5.5.1\5.5\msvc2013_64\bin\uic.exe" -o ".\Temp\GeneratedFiles\ui_%(Filename).h" "%(FullPath)"</Command>
     </CustomBuild>
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -201,7 +201,7 @@
     <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</IgnoreImportLibrary>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>lib\ffmpeg\include;E:\sPlayer\src;$(IncludePath)</IncludePath>
+    <IncludePath>lib\ffmpeg\include;src;$(IncludePath)</IncludePath>
     <LibraryPath>lib\ffmpeg\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -210,7 +210,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>.;$(QTDIR)\include;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtCore;release;.;$(QTDIR)\mkspecs\win32-msvc2013;.\Temp\GeneratedFiles;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;C:\Qt\Qt5.5.1\5.5\msvc2013_64\include;C:\Qt\Qt5.5.1\5.5\msvc2013_64\include\QtWidgets;C:\Qt\Qt5.5.1\5.5\msvc2013_64\include\QtGui;C:\Qt\Qt5.5.1\5.5\msvc2013_64\include\QtANGLE;C:\Qt\Qt5.5.1\5.5\msvc2013_64\include\QtCore;release;.;C:\Qt\Qt5.5.1\5.5\msvc2013_64\mkspecs\win32-msvc2013;.\Temp\GeneratedFiles;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-Zc:strictStrings -w34100 -w34189 -w44996 %(AdditionalOptions)</AdditionalOptions>
       <AssemblerListingLocation>release\</AssemblerListingLocation>
       <BrowseInformation>false</BrowseInformation>
@@ -228,8 +228,8 @@
       <WarningLevel>Level3</WarningLevel>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>qtmain.lib;shell32.lib;Qt5Core.lib;Qt5Widgets.lib;Qt5Gui.lib;avcodec.lib;avformat.lib;avutil.lib;avdevice.lib;avfilter.lib;postproc.lib;swresample.lib;swscale.lib;SDL2.lib;SDL2main.lib;SDL2test.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(QTDIR)\lib;C:/qt/qt5.5.1/5.5/msvc2013_64/lib;$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>C:\Qt\Qt5.5.1\5.5\msvc2013_64\lib\qtmain.lib;shell32.lib;C:\Qt\Qt5.5.1\5.5\msvc2013_64\lib\Qt5Core.lib;C:\Qt\Qt5.5.1\5.5\msvc2013_64\lib\Qt5Widgets.lib;C:\Qt\Qt5.5.1\5.5\msvc2013_64\lib\Qt5Gui.lib;avcodec.lib;avformat.lib;avutil.lib;avdevice.lib;avfilter.lib;postproc.lib;swresample.lib;swscale.lib;SDL2.lib;SDL2main.lib;SDL2test.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Qt\Qt5.5.1\5.5\msvc2013_64\lib;C:/qt/qt5.5.1/5.5/msvc2013_64/lib;C:\Qt\Qt5.5.1\5.5\msvc2013_64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
       <DataExecutionPrevention>true</DataExecutionPrevention>
       <GenerateDebugInformation>false</GenerateDebugInformation>
@@ -251,7 +251,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>.;$(QTDIR)\include;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtCore;debug;.;$(QTDIR)\mkspecs\win32-msvc2013;.\Temp\GeneratedFiles;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;C:\Qt\Qt5.5.1\5.5\msvc2013_64\include;C:\Qt\Qt5.5.1\5.5\msvc2013_64\include\QtWidgets;C:\Qt\Qt5.5.1\5.5\msvc2013_64\include\QtGui;C:\Qt\Qt5.5.1\5.5\msvc2013_64\include\QtANGLE;C:\Qt\Qt5.5.1\5.5\msvc2013_64\include\QtCore;debug;.;C:\Qt\Qt5.5.1\5.5\msvc2013_64\mkspecs\win32-msvc2013;.\Temp\GeneratedFiles;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-w34100 -w34189 -w44996 %(AdditionalOptions)</AdditionalOptions>
       <AssemblerListingLocation>Temp\debug\</AssemblerListingLocation>
       <BrowseInformation>false</BrowseInformation>
@@ -269,8 +269,8 @@
       <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>qtmaind.lib;shell32.lib;Qt5Cored.lib;Qt5Widgetsd.lib;Qt5Guid.lib;avcodec.lib;avformat.lib;avutil.lib;avdevice.lib;avfilter.lib;postproc.lib;swresample.lib;swscale.lib;SDL2.lib;SDL2main.lib;SDL2test.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(QTDIR)\lib;C:/qt/qt5.5.1/5.5/msvc2013_64/lib;$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>C:\Qt\Qt5.5.1\5.5\msvc2013_64\lib\qtmaind.lib;shell32.lib;C:\Qt\Qt5.5.1\5.5\msvc2013_64\lib\Qt5Cored.lib;C:\Qt\Qt5.5.1\5.5\msvc2013_64\lib\Qt5Widgetsd.lib;C:\Qt\Qt5.5.1\5.5\msvc2013_64\lib\Qt5Guid.lib;avcodec.lib;avformat.lib;avutil.lib;avdevice.lib;avfilter.lib;postproc.lib;swresample.lib;swscale.lib;SDL2.lib;SDL2main.lib;SDL2test.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Qt\Qt5.5.1\5.5\msvc2013_64\lib;C:/qt/qt5.5.1/5.5/msvc2013_64/lib;C:\Qt\Qt5.5.1\5.5\msvc2013_64\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
       <DataExecutionPrevention>true</DataExecutionPrevention>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -293,7 +293,7 @@
   <ImportGroup Label="ExtensionTargets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties UicDir=".\Temp\GeneratedFiles" RccDir=".\Temp\GeneratedFiles" Qt5Version_x0020_x64="msvc2013_64" />
+      <UserProperties UicDir=".\Temp\GeneratedFiles" RccDir=".\Temp\GeneratedFiles" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
