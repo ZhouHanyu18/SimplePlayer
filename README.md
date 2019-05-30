@@ -1,5 +1,5 @@
-# sPlayer
-视频播放器-简单实现
+# 视频播放器-简单实现
+
 ![Icon](media/README/main.png)
 
 # 基于FFmpeg和SDL的视频播放器
