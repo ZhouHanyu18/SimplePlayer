@@ -11,10 +11,14 @@ DEFINES += _WINDOWS WIN64 QT_WIDGETS_LIB
 INCLUDEPATH += . \
     ./debug \
     . \
+    ./lib/ffmpeg/include \
+    ./src \
     $(QTDIR)/mkspecs/win32-msvc2013 \
     ./Temp/GeneratedFiles
-LIBS += -lshell32 \
-    -lC:/qt/qt5.5.1/5.5/msvc2013_64/lib/Qt5Cored \
+LIBS += -L$$PWD/lib/ffmpeg/lib \
+    -lshell32 \
+    -lGdi32 \
+    -luser32 \
     -lavcodec \
     -lavformat \
     -lavutil \

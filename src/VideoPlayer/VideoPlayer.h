@@ -17,6 +17,7 @@ private:
 	bool bStop;//暂停播放
 	bool bStart;//开始解码
 	double dSpeed;//倍速
+	bool bQuit;
 	SDL_Event event;
 	int indexVideo;
 	int indexAudio;
@@ -26,6 +27,7 @@ private:
 
 	PacketQueue *qVideo;
 	PacketQueue *qAudio;
+	double time;
 	double ptsAudio;
 	double ptsVideo;
 
@@ -43,6 +45,9 @@ public:
 	void stop();
 	void seek(double T);
 	void speed(double S);
+	double getNow(){ return ptsAudio / 1000; }
+	void getTime(double &nTime, double &aDura){ nTime = ptsAudio / 1000; aDura = time/1000; }
+	void quit(){ bQuit = TRUE; };
 private:
 	int decodeAudio();
 	int decodeVideo();

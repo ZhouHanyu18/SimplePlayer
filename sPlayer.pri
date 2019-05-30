@@ -7,12 +7,16 @@
 message("You are running qmake on a generated .pro file. This may not work!")
 
 
-HEADERS += ./src/VideoPlayer/VideoPlayer.h \
+HEADERS += ./src/VideoPlayer/player.h \
+    ./src/VideoPlayer/videoform.h \
+    ./src/VideoPlayer/VideoPlayer.h \
     ./src/main/mainwindow.h \
-    $$PWD/src/VideoPlayer/videoform.h
+    ./src/main/MyThread.h
 SOURCES += ./src/main/main.cpp \
     ./src/main/mainwindow.cpp \
-    ./src/VideoPlayer/VideoPlayer.cpp \
-    $$PWD/src/VideoPlayer/videoform.cpp
+    ./src/main/MyThread.cpp \
+    ./src/VideoPlayer/player.cpp \
+    ./src/VideoPlayer/videoform.cpp \
+    ./src/VideoPlayer/VideoPlayer.cpp
 FORMS += ./src/main/mainwindow.ui \
-    $$PWD/src/VideoPlayer/videoform.ui
+    ./src/VideoPlayer/videoform.ui

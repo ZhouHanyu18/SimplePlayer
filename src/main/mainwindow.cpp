@@ -9,7 +9,9 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 	pVideoForm = new VideoForm(this);
+	
 	bChild = TRUE;
+	bPlay = FALSE;
 	pVideoForm->hide();
 	pVideoPlayer = NULL;
 	
@@ -34,6 +36,8 @@ void MainWindow::myThread()
 	{
 		SetWindowPos((HWND)this->winId(), HWND_TOPMOST, pos().x(), pos().y(), width(), height(), SWP_SHOWWINDOW);
 	}
+	if (bPlay)
+		setSlider();
 	int H = geometry().height() + geometry().y();
 	int h = QCursor::pos().y();
 	if (h<H && h>H - 100)
@@ -56,6 +60,17 @@ void MainWindow::init()
 	pVideoForm->show();
 }
 
+void MainWindow::setSlider()
+{
+	double m, n;
+	pVideoPlayer->getTime(m, n);
+	pVideoForm->setSlider(m, n);
+}
+void MainWindow::sliderChange(int t)
+{
+	if (pVideoPlayer)
+		pVideoPlayer->seek((double)t - pVideoPlayer->getNow());
+}
 void MainWindow::mousePressEvent(QMouseEvent * event)
 {
 	if (event->button() == Qt::LeftButton) //点击左边鼠标
@@ -124,9 +139,9 @@ void MainWindow::keyPressEvent(QKeyEvent *ev)
 		pVideoPlayer->stop();
 		break;
 	case Qt::Key_Escape:
-		/*SetWindowPos((HWND)this->winId(), HWND_NOTOPMOST, pos().x(), pos().y(), width(), height(), SWP_SHOWWINDOW);
-		showNormal();*/
-		//init();
+		showNormal();
+		SetWindowPos((HWND)this->winId(), HWND_NOTOPMOST, pos().x(), pos().y(), width(), height(), SWP_SHOWWINDOW);
+		init();
 		break;
 	default:
 		break;
@@ -154,6 +169,9 @@ void MainWindow::on_open_triggered()
 		QByteArray temp = file_name.toLocal8Bit();
 		char *str = temp.data();
 		pVideoPlayer = new VideoPlayer();
+		bPlay = TRUE;
+		pVideoForm->setWindowFlags(Qt::FramelessWindowHint | Qt::Tool | Qt::WindowStaysOnTopHint);
+		bChild = FALSE;
 		pVideoPlayer->play(str, (void *)this->winId());
 	}
 }
@@ -170,5 +188,12 @@ void MainWindow::on_about_triggered()
 
 void MainWindow::on_quit_triggered()
 {
+	pVideoPlayer->quit();
 	close();
+}
+
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+	pVideoPlayer->quit();
+	event->accept(); // 接受退出信号，程序退出
 }

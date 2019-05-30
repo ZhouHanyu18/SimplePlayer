@@ -1,10 +1,11 @@
-#include "VideoPlayer.h"
+ï»¿#include "VideoPlayer.h"
 
 VideoPlayer::VideoPlayer()
 {
 	bStart = FALSE;
 	bStop = FALSE;
-	finishRead = FALSE;
+	finishRead = FALSE; 
+	bQuit = FALSE;
 	dSpeed = 1;
 	qAudio = new PacketQueue();
 	qVideo = new PacketQueue();
@@ -44,7 +45,7 @@ int VideoPlayer::read()
 		{
 			//av_seek_frame(pFormatCtx, indexAudio, (dSpeed + ptsAudio / 1000) / av_q2d(pAudioCodeCtx->time_base), AVSEEK_FLAG_FRAME);
 		}
-		//Ò»Ö¡Ò»Ö¡¶ÁÈ¡Ñ¹ËõµÄÒôÆµÊý¾ÝAVPacket
+		//ä¸€å¸§ä¸€å¸§è¯»å–åŽ‹ç¼©çš„éŸ³é¢‘æ•°æ®AVPacket
 		if (av_read_frame(pFormatCtx, packet) >= 0)
 		{
 			if (packet->stream_index == indexAudio)
@@ -65,7 +66,7 @@ int VideoPlayer::read()
 	return -1;
 }
 
-//ÉèÖÃÒôÆµÊý¾Ý³¤¶È
+//è®¾ç½®éŸ³é¢‘æ•°æ®é•¿åº¦
 static Uint32 audio_len;
 static Uint8 *audio_pos;
 void VideoPlayer::audioCallback(Uint8 *stream, int len)
@@ -73,7 +74,7 @@ void VideoPlayer::audioCallback(Uint8 *stream, int len)
 	if (bStart && !bStop)
 	{
 		SDL_memset(stream, 0, len);
-		if (audio_len == 0)		//ÓÐÊý¾Ý²Å²¥·Å
+		if (audio_len == 0)		//æœ‰æ•°æ®æ‰æ’­æ”¾
 			return;
 		len = (len>audio_len ? audio_len : len);
 
@@ -101,6 +102,7 @@ int VideoPlayer::play(char *filepath, const void *handle)
 	{
 		return -1;
 	}
+	time = pFormatCtx->duration / 1000;
 	if (getIndex(indexAudio, AVMEDIA_TYPE_AUDIO) == -1)
 	{
 		return -1;
@@ -127,6 +129,8 @@ int VideoPlayer::play(char *filepath, const void *handle)
 
 	for (;;)
 	{
+		if (bQuit)
+			break;
 		if (decodeVideo() == 0)
 			break;
 		SDL_WaitEvent(&event);
@@ -134,7 +138,7 @@ int VideoPlayer::play(char *filepath, const void *handle)
 		{
 			if (ptsVideo > ptsAudio)
 			{
-				if (ptsVideo - ptsAudio < 1000)//Ìø¹ý´íÎóÖ¡
+				if (ptsVideo - ptsAudio < 1000)//è·³è¿‡é”™è¯¯å¸§
 					SDL_Delay(ptsVideo - ptsAudio);
 			}
 			//SDL---------------------------
@@ -153,7 +157,7 @@ int VideoPlayer::decodeAudio()
 	if (finishRead && qAudio->size == 0)
 	{
 		printf("outqVideo\n");
-		return 0;//±íÊ¾ÒÑÍê³É
+		return 0;//è¡¨ç¤ºå·²å®Œæˆ
 	}
 	if (qAudio->getQueue(packetAudio))
 	{
@@ -162,15 +166,15 @@ int VideoPlayer::decodeAudio()
 		ret = avcodec_decode_audio4(pAudioCodeCtx, pAudioFrame, &got_frame, packetAudio);
 		ptsAudio = av_q2d(pFormatCtx->streams[indexAudio]->time_base) * packetAudio->pts * 1000;
 		if (ret < 0) {
-			printf("%s", "½âÂëÍê³É");
+			printf("%s", "è§£ç å®Œæˆ");
 		}
 		int out_buffer_size;
 		if (got_frame) {
 			swr_convert(swrCtx, &audioBuffer, 2 * 44100, (const uint8_t **)pAudioFrame->data, pAudioFrame->nb_samples);
-			//»ñÈ¡sampleµÄsize
+			//èŽ·å–sampleçš„size
 			out_buffer_size = av_samples_get_buffer_size(NULL, out_channel_nb, pAudioFrame->nb_samples,
 				out_sample_fmt, 1);
-			//ÉèÖÃÒôÆµÊý¾Ý³¤¶È
+			//è®¾ç½®éŸ³é¢‘æ•°æ®é•¿åº¦
 			for (;;)
 			{
 				if (audio_len == 0)
@@ -183,7 +187,7 @@ int VideoPlayer::decodeAudio()
 		}
 		av_free_packet(packetAudio);
 	}
-	return -1;//±íÊ¾Î´Íê³É
+	return -1;//è¡¨ç¤ºæœªå®Œæˆ
 }
 
 int VideoPlayer::decodeVideo()
@@ -195,7 +199,7 @@ int VideoPlayer::decodeVideo()
 	if (finishRead && qVideo->size == 0)
 	{
 		printf("outqVideo\n");
-		return 0;//±íÊ¾ÒÑÍê³É
+		return 0;//è¡¨ç¤ºå·²å®Œæˆ
 	}
 	if (qVideo->getQueue(packetVideo))
 	{
@@ -214,14 +218,14 @@ int VideoPlayer::decodeVideo()
 		}
 		if (got_picture)
 		{
-			//³õÊ¼»¯»º³åÇø
+			//åˆå§‹åŒ–ç¼“å†²åŒº
 			av_image_fill_arrays(pFrameYUV->data, pFrameYUV->linesize, videoBuffer,
 				AV_PIX_FMT_YUV420P, pVideoCodeCtx->width, pVideoCodeCtx->height, 1);
 			sws_scale(img_convert_ctx, (const unsigned char* const*)pVideoFrame->data, pVideoFrame->linesize, 0, pVideoCodeCtx->height, pFrameYUV->data, pFrameYUV->linesize);
 		}
 		av_free_packet(packetVideo);
 	}
-	return -1;//±íÊ¾Î´Íê³É
+	return -1;//è¡¨ç¤ºæœªå®Œæˆ
 }
 
 void VideoPlayer::stop()
@@ -240,11 +244,12 @@ void VideoPlayer::stop()
 void VideoPlayer::seek(double T)
 {
 	bStop = TRUE;
+	SDL_PauseAudio(1);
 	qAudio->initQueue();
 	qVideo->initQueue();
 	av_seek_frame(pFormatCtx, indexAudio, (T + ptsAudio / 1000) / av_q2d(pAudioCodeCtx->time_base), AVSEEK_FLAG_BACKWARD);
-	
 	bStop = FALSE;
+	SDL_PauseAudio(0);
 }
 
 void VideoPlayer::speed(double S)

@@ -39,17 +39,22 @@ protected:
 	void mousePressEvent(QMouseEvent * event);
 	void mouseMoveEvent(QMouseEvent * event);
 	void mouseDoubleClickEvent(QMouseEvent *event);
+	void closeEvent(QCloseEvent *event);
 private:
     Ui::MainWindow *ui;
+public:
 	VideoPlayer *pVideoPlayer;
 	VideoForm *pVideoForm;
 	QPoint dragPosition;
 	MyThread *pThread;
 	bool bChild;
+	bool bPlay;
 private:
 	void init();
+	void setSlider();
 public slots :
 	void myThread();
+	void sliderChange(int t);
 
 };
 

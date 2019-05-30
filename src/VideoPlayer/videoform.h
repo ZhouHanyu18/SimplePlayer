@@ -18,11 +18,12 @@ public:
 private:
     Ui::VideoForm *ui;
 public:
-	
+	void setSlider(double m, double n);
 private slots:
 	void on_left_clicked();
 	void on_start_clicked();
 	void on_right_clicked();
+	
 };
 
 #endif // VIDEOFORM_H
