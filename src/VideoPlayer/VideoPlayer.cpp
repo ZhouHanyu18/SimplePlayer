@@ -74,13 +74,17 @@ void VideoPlayer::audioCallback(Uint8 *stream, int len)
 	if (bStart && !bStop)
 	{
 		SDL_memset(stream, 0, len);
-		if (audio_len == 0)		//有数据才播放
-			return;
-		len = (len>audio_len ? audio_len : len);
-
-		SDL_MixAudio(stream, audio_pos, len, SDL_MIX_MAXVOLUME);
-		audio_pos += len;
-		audio_len -= len;
+		while (len > 0)
+		{
+			if (audio_len == 0)
+				continue;
+			int temp = (len > audio_len ? audio_len : len);
+			SDL_MixAudio(stream, audio_pos, temp, SDL_MIX_MAXVOLUME);
+			audio_pos += temp;
+			audio_len -= temp;
+			stream += temp;
+			len -= temp;
+		}
 	}
 }
 
@@ -91,7 +95,8 @@ int VideoPlayer::decode()
 		SDL_Event event;
 		event.type = SFM_REFRESH_EVENT;
 		SDL_PushEvent(&event);
-		return decodeAudio();
+		if (audio_len == 0)
+			return decodeAudio();
 	}
 	return -1;
 }
@@ -170,20 +175,13 @@ int VideoPlayer::decodeAudio()
 		}
 		int out_buffer_size;
 		if (got_frame) {
-			swr_convert(swrCtx, &audioBuffer, 2 * 44100, (const uint8_t **)pAudioFrame->data, pAudioFrame->nb_samples);
+			int len = swr_convert(swrCtx, &audioBuffer, 2*44100, (const uint8_t **)pAudioFrame->data, pAudioFrame->nb_samples);
 			//获取sample的size
-			out_buffer_size = av_samples_get_buffer_size(NULL, out_channel_nb, pAudioFrame->nb_samples,
-				out_sample_fmt, 1);
+			out_buffer_size = len * out_channel_nb * av_get_bytes_per_sample(out_sample_fmt);
 			//设置音频数据长度
-			for (;;)
-			{
-				if (audio_len == 0)
-				{
-					audio_pos = (Uint8 *)audioBuffer;
-					audio_len = out_buffer_size;
-					break;
-				}
-			}
+			audio_pos = (Uint8 *)audioBuffer;
+			audio_len = out_buffer_size;	
+			
 		}
 		av_free_packet(packetAudio);
 	}

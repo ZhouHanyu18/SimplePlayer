@@ -81,7 +81,10 @@ void PacketQueue::initQueue()
 	AVPacketList *pkt, *pkt1;
 
 	SDL_LockMutex(mutex);
-	SDL_CondSignal(full);
+	if (nb_packets == capacity)
+	{
+		SDL_CondSignal(full);
+	}
 	for (pkt = first_pkt; pkt != NULL; pkt = pkt1) {
 		pkt1 = pkt->next;
 		av_free_packet(&pkt->pkt);
