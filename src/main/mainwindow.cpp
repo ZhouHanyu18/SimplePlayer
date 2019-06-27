@@ -188,12 +188,14 @@ void MainWindow::on_about_triggered()
 
 void MainWindow::on_quit_triggered()
 {
-	pVideoPlayer->quit();
+	if (pVideoPlayer)
+		pVideoPlayer->quit();
 	close();
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
-	pVideoPlayer->quit();
+	if (pVideoPlayer)
+		pVideoPlayer->quit();
 	event->accept(); // 接受退出信号，程序退出
 }
